@@ -1,3 +1,5 @@
+use std::env;
+
 const BITS_SIZE: usize = 8;
 const DEFAULT_INIT: [bool; BITS_SIZE] = [true, false, true, false, false, true, false, false]; 
 const ONE_CHAR: char = '*';
@@ -43,8 +45,28 @@ fn print_bits(bits: [bool; BITS_SIZE]) -> () {
     println!("{}", line);
 }
 
+fn string_to_bits(string: &str) -> [bool; BITS_SIZE] {
+    if string.len() != BITS_SIZE {
+        panic!("invalid input size. bits string must be of length {}.", BITS_SIZE)
+    }
+    let mut bits: [bool; BITS_SIZE] = [false; BITS_SIZE];
+    for i in 0..BITS_SIZE{
+        if string[i] == '*' {
+
+        }
+        else if string[i] == '.' {
+
+        }
+        else {
+            panic!("err")
+        }
+    }
+    bits
+}
+
 fn main() {
-    let mut bits: [bool; BITS_SIZE] = DEFAULT_INIT;
+    let args: Vec<String> = env::args().collect();
+    let mut bits: [bool; BITS_SIZE] = if args.len() > 1 { string_to_bits(&args[1]) } else { DEFAULT_INIT };
     for _i in 0..STEPS {
         print_bits(bits);
         bits = rule110(bits);
